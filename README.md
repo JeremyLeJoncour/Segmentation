@@ -16,7 +16,7 @@ En effet, à ce jour, l’IA est très utile dans le domaine de l’imagerie, su
 * Conclusion (avantages et inconvénients, concurrents, recommandations…)
 
 ## Introduction 
-Pour ce projet sur la segmentation, nous nous proposons d’étudier et traiter les images résultant de la publication d’A.Cardona et al. (2010) sur le système nerveux central de larves de Drosophilia melanogaster, modèle biologique couramment utilisé dans le domaine de la génétique et de la biologie du développement. L’article présente ici les avancées dans l’étude des microstructures neurophiles (qui qualifie tout élément qui se fixe essentiellement sur le système nerveux) afin d’établir une comparaison entre vertébrés et insectes.
+Pour ce projet sur la segmentation, nous nous proposons d’étudier et traiter les images résultant de la publication d’A.Cardona et al. (2010) sur le système nerveux central de larves de *Drosophilia melanogaster*, modèle biologique couramment utilisé dans le domaine de la génétique et de la biologie du développement. L’article présente ici les avancées dans l’étude des microstructures neurophiles (qui qualifie tout élément qui se fixe essentiellement sur le système nerveux) afin d’établir une comparaison entre vertébrés et insectes.
 
 <p align="center">
   <img src="Ressources/image2.png" />
@@ -52,7 +52,7 @@ Le modèle présente une architecture Unet, couramment utilisée dans la segment
 
 A chaque fois que nous faisons un traitement de convolution, nous multiplions le nombre de carte de caractéristique par 2. A l’inverse, nous divisons le nombre de carte de caractéristique par 2 à chaque concaténation ascendante afin d’obtenir notre mask de sortie qui n’a qu’un seul type d’objet à détecter. Nous activons cette dernière couche avec la fonction Sigmoid (classification binaire).
 
-La métrique d’évaluation choisie est le score F1, ou coefficient de Dice qui est recommandée pour ce genre de problématique. Cet indicateur de similarité peut être traduit sous forme vectoriel pour s’en servir de fonction de perte.
+La métrique d’évaluation choisie est le F score, ou coefficient de Dice qui est recommandée pour ce genre de problématique. Cet indicateur de similarité peut être traduit sous forme vectoriel pour s’en servir de fonction de perte.
 Comme représenté ci-contre, plus il y a de similarité, plus le score est élevé. On multiplie par 2 ce nombre pour obtenir un indice allant de 0 à 1.
 
 <p align="center">
@@ -71,7 +71,7 @@ Après 50 Epochs, un plateau est atteint pour la fonction de perte et l’Accura
 </p>
   
 ## Evaluation du modèle
-Une fonction show_result_on_an_image() a été construite pour comparer le mask réel avec celui du modèle. Cette fonction permet de visualiser et calculer le nombre de pixels n’ayant pas été correctement prédit par le modèle (ici affiché en rouge) :
+Une fonction show_result_on_an_image() a été construite pour comparer le mask réel avec celui du modèle. Cette fonction permet de visualiser et calculer le nombre de pixels n’ayant pas été correctement prédit par le modèle (ici affiché en rouge). Sur l’exemple ci-dessous, près de 4% des pixels ne sont pas attribués correctement.
 
 <p align="center">
   <img src="Ressources/image9.png" />
@@ -79,7 +79,7 @@ Une fonction show_result_on_an_image() a été construite pour comparer le mask 
 
 ## Conclusion
 
-
+Grâce à la data augmentation, nous avons pu générer 800 images et labels qui ont servi à entrainer notre modèle. L'architecture UNet, prévue pour la segmentation d'image biomédicale a été privilégiée. Le coefficient de Dice a été utilisé comme métrique d'évaluation qui se base sur le principe de similarité entre deux images et nettement plus performant que la *binary.crossentropy*. 
 
 
 

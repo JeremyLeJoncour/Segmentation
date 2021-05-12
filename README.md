@@ -20,8 +20,6 @@ Pour ce projet sur la segmentation, nous nous proposons d’étudier et traiter 
   <img src="Ressources/image2.png" />
 </p>
 
-[Presentation](Ressources/image2.png)
-
 ## Preprocessing
 Le projet a été réalisé sur Google Colab, le dataset a été importé et dézippé à cet effet. Les paths ont été définis afin de poursuivre notre traitement et lancer le modèle.
 Nous disposons des images de l’article (train et test) et de leur mask  (labels) en format TIFF qui nous permettront de segmenter les éléments souhaités (ici les cellules neuronales / synapses). Pour traiter les différentes images prévues pour l’apprentissage du modèle et d’évaluation, une fonction de conversion Tiff – PNG est réalisée.

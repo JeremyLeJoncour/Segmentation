@@ -61,7 +61,7 @@ Comme représenté ci-contre, plus il y a de similarité, plus le score est éle
 
 *Nous aurions aussi pu utiliser le coefficient de Jaccard (IoU). Les résultats seraient sensiblement les mêmes.*
 
-La métrique Binary.Accuracy est aussi ajouté afin de calculer la fréquence à laquelle les prédictions correspondent aux étiquettes binaires. Enfin, un callback est aussi défini afin de permettre au modèle de relevé le meilleur score obtenu durant l’apprentissage.
+La métrique *Binary.Accuracy* est aussi ajouté afin de calculer la fréquence à laquelle les prédictions correspondent aux étiquettes binaires. Enfin, un callback est aussi défini afin de permettre au modèle de relevé le meilleur score obtenu durant l’apprentissage.
 
 Après 50 Epochs, un plateau est atteint pour la fonction de perte et l’Accuracy.
 

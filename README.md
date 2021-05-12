@@ -1,7 +1,9 @@
 # Segmentation des Images de la Microscopie Électronique
 #### Ludivine, Luigi, Jérémy
 
-![Presentation](Ressources/image1.png)
+<p align="center">
+  <img src="Ressources/image1.png" />
+</p>
 
 ## Contexte du projet
 L’IA est aujourd’hui omniprésente dans la littérature scientifique de l’imagerie médicale, d’autant plus depuis le développement de nouveaux algorithmes appelés réseaux de neurones convolutifs.
@@ -22,5 +24,64 @@ Pour ce projet sur la segmentation, nous nous proposons d’étudier et traiter 
 
 ## Preprocessing
 Le projet a été réalisé sur Google Colab, le dataset a été importé et dézippé à cet effet. Les paths ont été définis afin de poursuivre notre traitement et lancer le modèle.
+
 Nous disposons des images de l’article (train et test) et de leur mask  (labels) en format TIFF qui nous permettront de segmenter les éléments souhaités (ici les cellules neuronales / synapses). Pour traiter les différentes images prévues pour l’apprentissage du modèle et d’évaluation, une fonction de conversion Tiff – PNG est réalisée.
+
+## Construction du set d’apprentissage
+Les images ont été transformées par skimage,  une librairie de traitement d’image afin d’obtenir les matrices qui seront ensuite gérées par le modèle. La première image et son mask  sont affichées ainsi que la superposition des deux afin de vérifier que les paths ont bien été définis.
+
+<p align="center">
+  <img src="Ressources/image3.png" />
+</p>
+
+## Data Augmentation
+Pour augmenter notre jeu de donnée, une fonction a été créée en utilisant skimage. Des copies des images et de leur mask ont été transformées en incluant des rotations à différents degrés, des ajouts de bruit ou encore des retournements horizontaux, verticaux ou pas de façon aléatoire. 800 images (512x512 pixels) ont donc été générées.
+
+<p align="center">
+  <img src="Ressources/image4.png" />
+</p>
+
+Les matrices des images et des labels d’entrainement ainsi que celles d’évaluation ont été sauvegardées. Après la normalisation des données, le modèle a pu être construit.
+
+## Construction du modèle
+Le modèle présente une architecture Unet, couramment utilisée dans la segmentation d’imagerie médicale. Il est composé de couche de traitement de convolution et de déconvolution afin d’obtenir le mask  produit en sortie. Un padding same a été attribué afin d’éviter les problèmes de concaténation et pour simplifier l’écriture du réseau.
+
+<p align="center">
+  <img src="Ressources/image5.png" />
+</p>
+
+A chaque fois que nous faisons un traitement de convolution, nous multiplions le nombre de carte de caractéristique par 2. A l’inverse, nous divisons le nombre de carte de caractéristique par 2 à chaque concaténation ascendante afin d’obtenir notre mask de sortie qui n’a qu’un seul type d’objet à détecter. Nous activons cette dernière couche avec la fonction Sigmoid (classification binaire).
+
+La métrique d’évaluation choisie est le score F1, ou coefficient de Dice qui est recommandée pour ce genre de problématique. Cet indicateur de similarité peut être traduit sous forme vectoriel pour s’en servir de fonction de perte.
+Comme représenté ci-contre, plus il y a de similarité, plus le score est élevé. On multiplie par 2 ce nombre pour obtenir un indice allant de 0 à 1.
+
+<p align="center">
+  <img src="Ressources/image6.png" />
+</p>
+
+*Nous aurions aussi pu utiliser le coefficient de Jaccard (IoU). Les résultats seraient sensiblement les mêmes.*
+
+La métrique Binary.Accuracy est aussi ajouté afin de calculer la fréquence à laquelle les prédictions correspondent aux étiquettes binaires. Enfin, un callback est aussi défini afin de permettre au modèle de relevé le meilleur score obtenu durant l’apprentissage.
+
+Après 50 Epochs, un plateau est atteint pour la fonction de perte et l’Accuracy.
+
+<p align="center">
+  <img src="Ressources/image7.png" />
+  <img src="Ressources/image8.png" />
+</p>
+  
+## Evaluation du modèle
+Une fonction show_result_on_an_image() a été construite pour comparer le mask réel avec celui du modèle. Cette fonction permet de visualiser et calculer le nombre de pixels n’ayant pas été correctement prédit par le modèle (ici affiché en rouge) :
+
+<p align="center">
+  <img src="Ressources/image9.png" />
+</p>
+
+## Conclusion
+
+
+
+
+
+
 

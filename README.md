@@ -77,6 +77,12 @@ Une fonction show_result_on_an_image() a été construite pour comparer le mask 
   <img src="Ressources/image9.png" />
 </p>
 
+Une évaluation global a aussi été effectué sous forme de matrice de confusion en prenant en compte la proportion de pixels blancs et noirs attribuée sur les images labels. Seulement 5% des pixels sont mal attribués.
+
+<p align="center">
+  <img src="Ressources/image10.png" />
+</p>
+
 ## Conclusion
 
 Grâce à la data augmentation, nous avons pu générer 800 images et labels qui ont servi à entrainer notre modèle. L'architecture UNet, prévue pour la segmentation d'image biomédicale a été privilégiée. Le coefficient de Dice a été utilisé comme métrique d'évaluation qui se base sur le principe de similarité entre deux images et nettement plus performant que la *binary.crossentropy*. Cette démarche nous a permis d'obtenir un modèle fonctionnelle aux résultats satisfaisants.

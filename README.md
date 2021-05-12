@@ -16,7 +16,11 @@ En effet, à ce jour, l’IA est très utile dans le domaine de l’imagerie, su
 ## Introduction 
 Pour ce projet sur la segmentation, nous nous proposons d’étudier et traiter les images résultant de la publication d’A.Cardona et al. (2010) sur le système nerveux central de larves de Drosophilia melanogaster, modèle biologique couramment utilisé dans le domaine de la génétique et de la biologie du développement. L’article présente ici les avancées dans l’étude des microstructures neurophiles (qui qualifie tout élément qui se fixe essentiellement sur le système nerveux) afin d’établir une comparaison entre vertébrés et insectes.
 
-![Presentation](Ressources/image2.png)
+<p align="center">
+  <img src="Ressources/image2.png" />
+</p>
+
+[Presentation](Ressources/image2.png)
 
 ## Preprocessing
 Le projet a été réalisé sur Google Colab, le dataset a été importé et dézippé à cet effet. Les paths ont été définis afin de poursuivre notre traitement et lancer le modèle.
